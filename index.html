@@ -1003,7 +1003,9 @@ function renderEq(){
   }
   grid.innerHTML=data.map(e=>`
     <div class="product-card" onclick="abrirModal(${JSON.stringify(e).replace(/"/g,'&quot;')})">
-      ${imgOrEmoji(getImgEq(e.modelo),'📱')}
+      ${e.imagen
+        ? `<div class="product-img" style="background:#fff;"><img src="${e.imagen}" alt="${e.modelo}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📱';this.parentElement.style.background='var(--gris2)'"/></div>`
+        : imgOrEmoji(getImgEq(e.modelo),'📱')}
         <div class="product-badge">SELLADO</div>
       <div class="product-body">
         <div class="product-model">📍 ${e.sucursal}</div>
@@ -1040,7 +1042,9 @@ function renderAc(){
   }
   grid.innerHTML=data.map(a=>`
     <div class="product-card" onclick="abrirModalAc(${JSON.stringify(a).replace(/"/g,'&quot;')})">
-      ${imgOrEmoji(getImgAc(a.cat,a.nombre),{'Fundas / Cases':'🛡️','Cargadores / Cables':'⚡','AirPods / Auriculares':'🎧','Vidrios templados':'🔲'}[a.cat]||'📦')}
+      ${a.imagen
+        ? `<div class="product-img" style="background:#fff;"><img src="${a.imagen}" alt="${a.nombre}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='🎧';this.parentElement.style.background='var(--gris2)'"/></div>`
+        : imgOrEmoji(getImgAc(a.cat,a.nombre),{'Fundas / Cases':'🛡️','Cargadores / Cables':'⚡','AirPods / Auriculares':'🎧','Vidrios templados':'🔲'}[a.cat]||'📦')}
       <div class="product-body">
         <div class="product-model">${a.cat||'Accesorio'}</div>
         <div class="product-name">${a.nombre||''}</div>
@@ -1074,11 +1078,18 @@ function filtrarAc(f,btn){
 // ====== MODAL EQUIPO ======
 function abrirModal(prod){
   productoActual={...prod,tipo:'equipo'};
-  const imgSrc=getImgEq(prod.modelo);
+  const imgSrc=prod.imagen||getImgEq(prod.modelo);
   const modalImgEl=document.getElementById('modal-img');
-  if(imgSrc){
+  if(prod.imagen){
     modalImgEl.style.background='#fff';
-    modalImgEl.innerHTML=`<img src="${imgSrc}" alt="${prod.modelo}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onerror="this.parentElement.innerHTML='📱';this.parentElement.style.background='var(--gris2)'"/>`;
+    modalImgEl.innerHTML=`<img src="${prod.imagen}" alt="${prod.modelo}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='📱';this.parentElement.style.background='var(--gris2)'"/>`;
+  } else if(getImgEq(prod.modelo)){
+    const imgData=getImgEq(prod.modelo);
+    if(imgData&&imgData.startsWith('iphone-svg:')){
+      const [,c1,c2,lbl]=imgData.split(':');
+      modalImgEl.style.background=`linear-gradient(135deg,${c1}22,${c2}44)`;
+      modalImgEl.innerHTML=`<img src="${buildIphoneSVG(c1,c2,lbl)}" style="width:75%;height:75%;object-fit:contain;"/>`;
+    }
   } else {
     modalImgEl.style.background='';
     modalImgEl.textContent='📱';
