@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ilustre Phone — Tienda Apple Mendoza</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --negro: #080809;
+  --negro2: #0D0D10;
+  --gris: #111318;
+  --gris2: #181B22;
+  --blanco: #E8E9EF;
+  --blanco2: #7A7D8A;
+  --acento: #5B6F8F;
+  --acento2: #7A90B0;
+  --grad: linear-gradient(135deg, #3D5170, #5B6F8F, #7A90B0);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--negro);
+  color:var(--blanco);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CURSOR */
+.cursor{
+  width:10px;height:10px;
+  background:var(--acento);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  transition:transform 0.15s ease;
+  mix-blend-mode:normal;
+}
+.cursor-ring{
+  width:36px;height:36px;
+  border:1.5px solid rgba(91,111,143,0.5);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9998;
+  transition:all 0.3s ease;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+.nav-logo-icon{
+  width:36px;height:36px;
+  background:var(--grad);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.nav-logo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;
+  letter-spacing:0.08em;
+  color:var(--blanco);
+}
+.nav-links{
+  display:flex;align-items:center;gap:2rem;
+  list-style:none;
+}
+.nav-links a{
+  text-decoration:none;
+  font-size:13px;
+  font-weight:500;
+  color:var(--blanco2);
+  letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--blanco);}
+.nav-wa{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 18px;
+  background:var(--grad);
+  border-radius:100px;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  letter-spacing:0.03em;
+  transition:opacity 0.2s,transform 0.2s;
+}
+.nav-wa:hover{opacity:0.85;transform:scale(1.03);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:0 2.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 70% 50%, rgba(91,111,143,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 20% 80%, rgba(61,81,112,0.08) 0%, transparent 60%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(91,111,143,0.03) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(91,111,143,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-content{
+  position:relative;z-index:2;
+  max-width:720px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;
+  border:1px solid rgba(91,111,143,0.4);
+  border-radius:100px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.1em;
+  color:var(--acento);
+  text-transform:uppercase;
+  margin-bottom:1.8rem;
+}
+.hero-tag-dot{
+  width:6px;height:6px;
+  background:var(--acento);
+  border-radius:50%;
+  animation:blink 1.5s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(56px,9vw,110px);
+  line-height:0.92;
+  letter-spacing:0.02em;
+  margin-bottom:1.5rem;
+}
+.hero h1 span{
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:16px;
+  font-weight:300;
+  color:var(--blanco2);
+  line-height:1.7;
+  max-width:480px;
+  margin-bottom:2.5rem;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 28px;
+  background:var(--grad);
+  border-radius:100px;
+  font-size:14px;
+  font-weight:600;
+  color:#fff;
+  text-decoration:none;
+  transition:transform 0.2s,opacity 0.2s;
+}
+.btn-primary:hover{transform:scale(1.04);opacity:0.9;}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 28px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--blanco);
+  text-decoration:none;
+  transition:border-color 0.2s,background 0.2s;
+}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04);}
+.hero-stats{
+  position:absolute;right:2.5rem;bottom:3rem;
+  display:flex;gap:2rem;
+}
+.hero-stat{
+  text-align:right;
+}
+.hero-stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px;
+  line-height:1;
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-stat-label{
+  font-size:11px;
+  color:var(--blanco2);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:0.12em;color:var(--blanco2);text-transform:uppercase;
+  animation:float 2s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--acento),transparent);}
+
+/* SECCIÓN GENERAL */
+section{padding:6rem 2.5rem;}
+.section-tag{
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--acento);font-weight:600;margin-bottom:0.8rem;
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,5vw,64px);
+  letter-spacing:0.03em;
+  line-height:1;
+  margin-bottom:0.5rem;
+}
+.section-sub{
+  font-size:15px;color:var(--blanco2);
+  font-weight:300;line-height:1.6;
+  max-width:480px;
+}
+
+/* FILTROS Y BÚSQUEDA */
+.filters-bar{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:2rem;
+  flex-wrap:wrap;
+}
+.filter-btn{
+  padding:8px 18px;
+  border-radius:100px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:transparent;
+  color:var(--blanco2);
+  font-size:12px;font-weight:500;
+  cursor:none;
+  transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--acento);
+  border-color:var(--acento);
+  color:#fff;
+}
+.search-box{
+  margin-left:auto;
+  position:relative;
+}
+.search-box input{
+  padding:8px 16px 8px 38px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:100px;
+  color:var(--blanco);
+  font-size:12px;
+  font-family:'DM Sans',sans-serif;
+  outline:none;
+  width:200px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.search-box input:focus{border-color:rgba(91,111,143,0.5);background:rgba(91,111,143,0.05);}
+.search-box input::placeholder{color:var(--blanco2);}
+.search-icon-s{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  font-size:13px;opacity:0.5;
+}
+
+/* GRILLA PRODUCTOS */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.2rem;
+}
+.product-card{
+  background:var(--gris);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:20px;
+  overflow:hidden;
+  transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
+  cursor:none;
+}
+.product-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(91,111,143,0.3);
+  box-shadow:0 20px 60px rgba(91,111,143,0.1);
+}
+.product-img{
+  height:200px;
+  background:var(--gris2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:70px;
+  position:relative;
+  overflow:hidden;
+}
+.product-img::after{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(255,107,43,0.08),transparent 70%);
+}
+.product-badge{
+  position:absolute;top:12px;left:12px;
+  padding:4px 10px;
+  background:var(--grad);
+  border-radius:100px;
+  font-size:10px;font-weight:700;
+  color:#fff;letter-spacing:0.04em;
+}
+.product-body{padding:1.2rem;}
+.product-model{
+  font-size:11px;color:var(--blanco2);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.product-name{
+  font-size:16px;font-weight:600;
+  color:var(--blanco);
+  margin-bottom:8px;
+  line-height:1.3;
+}
+.product-specs{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.spec-chip{
+  padding:3px 10px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:100px;
+  font-size:11px;color:var(--blanco2);
+}
+.bat-row{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:14px;
+}
+.bat-label{font-size:11px;color:var(--blanco2);}
+.bat-track{
+  flex:1;height:4px;
+  background:rgba(255,255,255,0.08);
+  border-radius:2px;overflow:hidden;
+}
+.bat-fill{height:100%;border-radius:2px;transition:width 0.6s ease;}
+.bat-pct{font-size:11px;font-weight:600;}
+.product-footer{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.product-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:0.02em;
+  color:var(--blanco);
+}
+.product-price span{font-size:14px;color:var(--blanco2);font-family:'DM Sans',sans-serif;font-weight:400;}
+.btn-consultar{
+  display:flex;align-items:center;gap:6px;
+  padding:9px 16px;
+  background:var(--grad);
+  border-radius:100px;
+  border:none;
+  font-size:12px;font-weight:600;
+  color:#fff;
+  cursor:none;
+  transition:transform 0.2s,opacity 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.btn-consultar:hover{transform:scale(1.05);opacity:0.9;}
+.empty-state{
+  grid-column:1/-1;
+  text-align:center;
+  padding:4rem;
+  color:var(--blanco2);
+}
+.empty-state-icon{font-size:48px;margin-bottom:1rem;}
+.loading-state{
+  grid-column:1/-1;
+  display:flex;flex-direction:column;align-items:center;
+  padding:4rem;gap:1rem;color:var(--blanco2);font-size:14px;
+}
+.spin{
+  width:32px;height:32px;
+  border:2px solid rgba(255,107,43,0.2);
+  border-top-color:var(--acento);
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* POR QUÉ ELEGIRNOS */
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin-top:3rem;
+}
+.why-card{
+  padding:2rem;
+  background:var(--gris);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:20px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.why-card:hover{border-color:rgba(91,111,143,0.25);transform:translateY(-4px);}
+.why-icon{
+  font-size:32px;margin-bottom:1rem;
+}
+.why-title{
+  font-size:16px;font-weight:600;
+  margin-bottom:8px;color:var(--blanco);
+}
+.why-text{
+  font-size:13px;color:var(--blanco2);line-height:1.6;
+}
+
+/* SUCURSALES */
+.suc-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+  margin-top:3rem;
+}
+.suc-card{
+  padding:2.5rem;
+  background:var(--gris);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:24px;
+  transition:border-color 0.3s;
+}
+.suc-card:hover{border-color:rgba(91,111,143,0.3);}
+.suc-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px;letter-spacing:0.05em;
+  margin-bottom:0.5rem;
+}
+.suc-addr{font-size:14px;color:var(--blanco2);margin-bottom:1.5rem;line-height:1.6;}
+.suc-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;
+  background:rgba(91,111,143,0.1);
+  border:1px solid rgba(91,111,143,0.25);
+  border-radius:100px;
+  font-size:11px;font-weight:600;
+  color:var(--acento);
+  letter-spacing:0.05em;
+}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{
+  background:var(--gris);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:28px;
+  padding:2.5rem;
+  max-width:480px;width:100%;
+  transform:translateY(20px);
+  transition:transform 0.3s;
+  position:relative;
+  max-height:90vh;
+  overflow-y:auto;
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-close{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:rgba(255,255,255,0.06);
+  border:none;width:32px;height:32px;
+  border-radius:50%;
+  font-size:16px;color:var(--blanco2);
+  cursor:none;
+  transition:background 0.2s;
+}
+.modal-close:hover{background:rgba(255,255,255,0.12);}
+.modal-product-img{
+  height:140px;
+  background:var(--gris2);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:60px;
+  margin-bottom:1.5rem;
+}
+.modal-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;letter-spacing:0.03em;
+  margin-bottom:0.4rem;
+}
+.modal-specs-row{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-bottom:1.2rem;
+}
+.modal-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:1.5rem;
+}
+.modal-divider{
+  border:none;border-top:1px solid rgba(255,255,255,0.07);
+  margin-bottom:1.5rem;
+}
+.modal-form-label{
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--blanco2);font-weight:600;margin-bottom:8px;display:block;
+}
+.modal-input{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  color:var(--blanco);
+  font-size:14px;
+  font-family:'DM Sans',sans-serif;
+  outline:none;
+  margin-bottom:12px;
+  transition:border-color 0.2s;
+}
+.modal-input:focus{border-color:rgba(91,111,143,0.5);}
+.modal-input::placeholder{color:rgba(255,255,255,0.25);}
+.modal-select{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  color:var(--blanco);
+  font-size:14px;
+  font-family:'DM Sans',sans-serif;
+  outline:none;
+  margin-bottom:16px;
+  cursor:none;
+  appearance:none;
+}
+.modal-select option{background:var(--gris);color:var(--blanco);}
+.btn-wa{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  border-radius:14px;
+  border:none;
+  font-size:15px;font-weight:700;
+  color:#fff;
+  cursor:none;
+  font-family:'DM Sans',sans-serif;
+  transition:transform 0.2s,opacity 0.2s;
+}
+.btn-wa:hover{transform:scale(1.02);opacity:0.92;}
+
+/* FOOTER */
+footer{
+  padding:4rem 2.5rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;
+}
+.footer-brand{}
+.footer-logo{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:1rem;
+}
+.footer-logo-icon{
+  width:32px;height:32px;
+  background:var(--grad);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;
+}
+.footer-logo-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:0.08em;
+}
+.footer-desc{font-size:13px;color:var(--blanco2);line-height:1.6;max-width:220px;}
+.footer-col h4{
+  font-size:12px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--blanco2);margin-bottom:1rem;
+}
+.footer-col a{
+  display:block;text-decoration:none;
+  font-size:14px;color:rgba(255,255,255,0.6);
+  margin-bottom:8px;
+  transition:color 0.2s;
+}
+.footer-col a:hover{color:var(--blanco);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding:1.5rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:rgba(255,255,255,0.3);
+}
+
+/* WHATSAPP FLOTANTE */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;
+  z-index:200;
+  display:flex;align-items:center;gap:10px;
+}
+.wa-float-btn{
+  width:56px;height:56px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  animation:pulse-wa 2s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+.wa-float-btn:hover{transform:scale(1.1);}
+@keyframes pulse-wa{
+  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4);}
+  50%{box-shadow:0 4px 30px rgba(37,211,102,0.7);}
+}
+
+/* TOAST */
+.toast{
+  position:fixed;top:5rem;right:1.5rem;z-index:999;
+  padding:12px 20px;
+  background:var(--gris);
+  border:1px solid rgba(91,111,143,0.4);
+  border-radius:12px;
+  font-size:13px;color:var(--blanco);
+  transform:translateX(120%);
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.toast.show{transform:translateX(0);}
+
+/* ANIMACIONES ENTRADA */
+.fade-up{
+  opacity:0;transform:translateY(30px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.2rem;}
+  .nav-links{display:none;}
+  .hero{padding:0 1.2rem;}
+  section{padding:4rem 1.2rem;}
+  footer{grid-template-columns:1fr;gap:1.5rem;}
+  .suc-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:0.5rem;text-align:center;}
+  .hero-stats{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon"> </div>
+    <span class="nav-logo-text">Ilustre Phone</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#equipos">Equipos</a></li>
+    <li><a href="#accesorios">Accesorios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#sucursales">Sucursales</a></li>
+  </ul>
+  <a href="https://wa.me/5492622271093" target="_blank" class="nav-wa">
+    💬 Consultar por WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Tienda Apple — Mendoza
+    </div>
+    <h1>EL IPHONE<br>QUE <span>BUSCABAS</span><br>ESTÁ ACÁ</h1>
+    <p class="hero-sub">
+      Equipos sellados y usados con garantía. Precio, calidad y seguridad en La Consulta y Tunuyán, Mendoza.
+    </p>
+    <div class="hero-actions">
+      <a href="#equipos" class="btn-primary">📱 Ver equipos</a>
+      <a href="#accesorios" class="btn-secondary">🎧 Accesorios</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">2</div>
+      <div class="hero-stat-label">Sucursales</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Con garantía</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- EQUIPOS -->
+<section id="equipos">
+  <div class="fade-up">
+    <div class="section-tag">Catálogo en vivo</div>
+    <h2 class="section-title">EQUIPOS<br>DISPONIBLES</h2>
+    <p class="section-sub">Stock actualizado en tiempo real. Todos los equipos con garantía.</p>
+  </div>
+  <div class="filters-bar fade-up" style="margin-top:2rem;">
+    <button class="filter-btn active" onclick="filtrarEq('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="filtrarEq('Tunuyán',this)">📍 Tunuyán</button>
+    <button class="filter-btn" onclick="filtrarEq('La Consulta',this)">📍 La Consulta</button>
+    <div class="search-box">
+      <span class="search-icon-s">🔍</span>
+      <input type="text" placeholder="Buscar modelo..." id="search-eq" oninput="buscarEq(this.value)"/>
+    </div>
+  </div>
+  <div class="products-grid" id="grid-eq">
+    <div class="loading-state">
+      <div class="spin"></div>
+      <span>Cargando equipos...</span>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESORIOS -->
+<section id="accesorios" style="background:var(--negro2);border-radius:32px;margin:0 1rem;">
+  <div class="fade-up">
+    <div class="section-tag">Para tu iPhone</div>
+    <h2 class="section-title">ACCESORIOS</h2>
+    <p class="section-sub">Fundas, cargadores, AirPods y más. Todo lo que necesitás.</p>
+  </div>
+  <div class="filters-bar fade-up" style="margin-top:2rem;">
+    <button class="filter-btn active" onclick="filtrarAc('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="filtrarAc('Fundas / Cases',this)">Fundas</button>
+    <button class="filter-btn" onclick="filtrarAc('Cargadores / Cables',this)">Cargadores</button>
+    <button class="filter-btn" onclick="filtrarAc('AirPods / Auriculares',this)">AirPods</button>
+    <button class="filter-btn" onclick="filtrarAc('Vidrios templados',this)">Vidrios</button>
+  </div>
+  <div class="products-grid" id="grid-ac">
+    <div class="loading-state">
+      <div class="spin"></div>
+      <span>Cargando accesorios...</span>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ ELEGIRNOS -->
+<section id="nosotros">
+  <div class="fade-up">
+    <div class="section-tag">Por qué elegirnos</div>
+    <h2 class="section-title">PRECIO.<br>CALIDAD.<br>SEGURIDAD.</h2>
+  </div>
+  <div class="why-grid fade-up">
+    <div class="why-card">
+      <div class="why-icon">✅</div>
+      <div class="why-title">Productos con garantía</div>
+      <div class="why-text">Todos nuestros equipos y accesorios cuentan con garantía. Vendemos con confianza.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔄</div>
+      <div class="why-title">Plan canje</div>
+      <div class="why-text">Entregá tu equipo actual y llevate el que querés. Te damos el mejor precio por el tuyo.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📦</div>
+      <div class="why-title">Sellados y usados</div>
+      <div class="why-text">Contamos con equipos sellados de fábrica y usados verificados, para todos los presupuestos.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Atención rápida</div>
+      <div class="why-text">Respondemos por WhatsApp al instante. Sin vueltas, sin espera.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCURSALES -->
+<section id="sucursales">
+  <div class="fade-up">
+    <div class="section-tag">Encontranos</div>
+    <h2 class="section-title">NUESTRAS<br>SUCURSALES</h2>
+  </div>
+  <div class="suc-grid fade-up">
+    <div class="suc-card">
+      <div class="suc-name">📍 La Consulta</div>
+      <div class="suc-addr">San Carlos, Mendoza<br>Lunes a sábado — 9 a 20 hs</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="suc-tag">🟢 Abierto</div>
+        <a href="https://wa.me/5492622271093?text=Hola!%20Quiero%20consultar%20por%20La%20Consulta" target="_blank" class="suc-tag" style="text-decoration:none;cursor:none;">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="suc-card">
+      <div class="suc-name">📍 Tunuyán</div>
+      <div class="suc-addr">Tunuyán, Mendoza<br>Lunes a sábado — 9 a 20 hs</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="suc-tag">🟢 Abierto</div>
+        <a href="https://wa.me/5492622271093?text=Hola!%20Quiero%20consultar%20por%20Tunuy%C3%A1n" target="_blank" class="suc-tag" style="text-decoration:none;cursor:none;">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">
+      <div class="footer-logo-icon"> </div>
+      <span class="footer-logo-text">Ilustre Phone</span>
+    </div>
+    <p class="footer-desc">Tu tienda Apple de confianza en Mendoza. Precio, calidad y seguridad.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Productos</h4>
+    <a href="#equipos">Equipos sellados</a>
+    <a href="#equipos">Equipos usados</a>
+    <a href="#accesorios">Accesorios</a>
+  </div>
+  <div class="footer-col">
+    <h4>Contacto</h4>
+    <a href="https://wa.me/5492622271093" target="_blank">💬 WhatsApp</a>
+    <a href="https://instagram.com/ilustre.phone" target="_blank">📸 Instagram</a>
+    <a href="#sucursales">📍 Sucursales</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Ilustre Phone — Todos los derechos reservados</span>
+  <span>Mendoza, Argentina</span>
+</div>
+
+<!-- WA FLOTANTE -->
+<a href="https://wa.me/5492622271093" target="_blank" class="wa-float-btn" style="position:fixed;bottom:2rem;right:2rem;z-index:200;">💬</a>
+
+<!-- MODAL CONSULTA -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-product-img" id="modal-img"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-specs-row" id="modal-specs"></div>
+    <div class="modal-price" id="modal-price"></div>
+    <hr class="modal-divider"/>
+    <label class="modal-form-label">Tu nombre</label>
+    <input class="modal-input" id="m-nombre" type="text" placeholder="ej: Juan Pérez"/>
+    <label class="modal-form-label">¿Dónde preferís buscar el equipo?</label>
+    <select class="modal-select" id="m-suc">
+      <option value="cualquier sucursal">Cualquier sucursal</option>
+      <option value="La Consulta">📍 La Consulta</option>
+      <option value="Tunuyán">📍 Tunuyán</option>
+    </select>
+    <label class="modal-form-label">Mensaje adicional (opcional)</label>
+    <input class="modal-input" id="m-msg" type="text" placeholder="ej: ¿Aceptan canje?"/>
+    <button class="btn-wa" onclick="enviarWA()">
+      💬 Consultar por WhatsApp
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== SUPABASE ======
+const SUPA_URL='https://rvnvixiuigluutbzftxq.supabase.co';
+const SUPA_KEY='sb_publishable_y3TIT6mATrqkoaki2zZSew__HDhxZCm';
+const WA_NUM='5492622271093';
+
+async function sbGet(tabla){
+  const res=await fetch(`${SUPA_URL}/rest/v1/${tabla}?select=id,data&order=updated_at.asc`,{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+  });
+  if(!res.ok) throw new Error(await res.text());
+  const rows=await res.json();
+  return rows.map(r=>({...r.data,_id:r.id}));
+}
+
+let allEq=[], allAc=[];
+let filtroEq='todos', busqEq='';
+let filtroAc='todos';
+let productoActual=null;
+
+// ====== ICONOS ======
+function iconoEq(modelo){
+  if(!modelo) return '📱';
+  const m=modelo.toLowerCase();
+  if(m.includes('pro max')) return '📱';
+  if(m.includes('pro')) return '📱';
+  if(m.includes('plus')) return '📱';
+  return '📱';
+}
+function iconoAc(cat){
+  const m={'Fundas / Cases':'🛡️','Cargadores / Cables':'⚡','AirPods / Auriculares':'🎧','Vidrios templados':'🔲'};
+  return m[cat]||'📦';
+}
+
+// ====== BATERÍA COLOR ======
+function batColor(b){return b>=80?'#2E7D32':b>=50?'#E65100':'#C62828';}
+
+// ====== RENDER EQUIPOS ======
+function renderEq(){
+  const grid=document.getElementById('grid-eq');
+  let data=allEq.filter(e=>Number(e.stock)>0);
+  if(filtroEq!=='todos') data=data.filter(e=>e.sucursal===filtroEq);
+  if(busqEq) data=data.filter(e=>(e.modelo||'').toLowerCase().includes(busqEq.toLowerCase())||(e.memoria||'').toLowerCase().includes(busqEq.toLowerCase()));
+  if(data.length===0){
+    if(allEq.length===0){
+      grid.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📱</div><p>Cargando equipos...</p></div>`;
+    } else {
+      grid.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📱</div><p>No hay equipos disponibles en este momento.<br><a href="https://wa.me/5492622271093" style="color:var(--acento)">Consultanos por WhatsApp</a></p></div>`;
+    }
+    return;
+  }
+  grid.innerHTML=data.map(e=>`
+    <div class="product-card" onclick="abrirModal(${JSON.stringify(e).replace(/"/g,'&quot;')})">
+      <div class="product-img">
+        ${iconoEq(e.modelo)}
+        <div class="product-badge">SELLADO</div>
+      </div>
+      <div class="product-body">
+        <div class="product-model">📍 ${e.sucursal}</div>
+        <div class="product-name">${e.modelo||'iPhone'}</div>
+        <div class="product-specs">
+          <span class="spec-chip">${e.memoria||''}</span>
+          ${e.imei?`<span class="spec-chip">IMEI ···${e.imei.slice(-4)}</span>`:''}
+        </div>
+        <div class="bat-row">
+          <span class="bat-label">Batería</span>
+          <div class="bat-track"><div class="bat-fill" style="width:${e.bateria}%;background:${batColor(e.bateria)}"></div></div>
+          <span class="bat-pct" style="color:${batColor(e.bateria)}">${e.bateria}%</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">USD ${(e.precio||0).toLocaleString('es-AR')} <span>dólares</span></div>
+          <button class="btn-consultar">💬 Consultar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ====== RENDER ACCESORIOS ======
+function renderAc(){
+  const grid=document.getElementById('grid-ac');
+  let data=allAc.filter(a=>Number(a.stockT||0)+Number(a.stockC||0)>0);
+  if(filtroAc!=='todos') data=data.filter(a=>a.cat===filtroAc);
+  if(data.length===0){
+    if(allAc.length===0){
+      grid.innerHTML=`<div class="empty-state"><div class="empty-state-icon">🎧</div><p>Cargando accesorios...</p></div>`;
+    } else {
+      grid.innerHTML=`<div class="empty-state"><div class="empty-state-icon">🎧</div><p>No hay accesorios disponibles en este momento.</p></div>`;
+    }
+    return;
+  }
+  grid.innerHTML=data.map(a=>`
+    <div class="product-card" onclick="abrirModalAc(${JSON.stringify(a).replace(/"/g,'&quot;')})">
+      <div class="product-img">${iconoAc(a.cat)}</div>
+      <div class="product-body">
+        <div class="product-model">${a.cat||'Accesorio'}</div>
+        <div class="product-name">${a.nombre||''}</div>
+        <div class="product-specs">
+          ${(a.stockT||0)>0?`<span class="spec-chip">📍 Tunuyán: ${a.stockT}</span>`:''}
+          ${(a.stockC||0)>0?`<span class="spec-chip">📍 La Consulta: ${a.stockC}</span>`:''}
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$ ${(a.precio||0).toLocaleString('es-AR')} <span>pesos</span></div>
+          <button class="btn-consultar">💬 Consultar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ====== FILTROS ======
+function filtrarEq(f,btn){
+  filtroEq=f;
+  document.querySelectorAll('#equipos .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderEq();
+}
+function buscarEq(q){busqEq=q;renderEq();}
+function filtrarAc(f,btn){
+  filtroAc=f;
+  document.querySelectorAll('#accesorios .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAc();
+}
+
+// ====== MODAL EQUIPO ======
+function abrirModal(prod){
+  productoActual={...prod,tipo:'equipo'};
+  document.getElementById('modal-img').textContent=iconoEq(prod.modelo);
+  document.getElementById('modal-title').textContent=`${prod.modelo||'iPhone'} ${prod.memoria||''}`;
+  document.getElementById('modal-specs').innerHTML=`
+    <span class="spec-chip">📍 ${prod.sucursal}</span>
+    <span class="spec-chip">🔋 ${prod.bateria}%</span>
+    ${prod.imei?`<span class="spec-chip">IMEI ···${prod.imei.slice(-4)}</span>`:''}`;
+  document.getElementById('modal-price').textContent=`USD ${(prod.precio||0).toLocaleString('es-AR')}`;
+  document.getElementById('m-nombre').value='';
+  document.getElementById('m-msg').value='';
+  document.getElementById('modal').classList.add('open');
+}
+
+// ====== MODAL ACCESORIO ======
+function abrirModalAc(prod){
+  productoActual={...prod,tipo:'accesorio'};
+  document.getElementById('modal-img').textContent=iconoAc(prod.cat);
+  document.getElementById('modal-title').textContent=prod.nombre||'Accesorio';
+  document.getElementById('modal-specs').innerHTML=`
+    <span class="spec-chip">${prod.cat}</span>
+    ${(prod.stockT||0)>0?`<span class="spec-chip">📍 Tunuyán: ${prod.stockT}</span>`:''}
+    ${(prod.stockC||0)>0?`<span class="spec-chip">📍 La Consulta: ${prod.stockC}</span>`:''}`;
+  document.getElementById('modal-price').textContent=`$ ${(prod.precio||0).toLocaleString('es-AR')}`;
+  document.getElementById('m-nombre').value='';
+  document.getElementById('m-msg').value='';
+  document.getElementById('modal').classList.add('open');
+}
+
+function cerrarModal(){document.getElementById('modal').classList.remove('open');}
+
+// ====== ENVIAR WA ======
+function enviarWA(){
+  if(!productoActual) return;
+  const nombre=document.getElementById('m-nombre').value.trim();
+  const suc=document.getElementById('m-suc').value;
+  const msg=document.getElementById('m-msg').value.trim();
+  const es=productoActual.tipo==='equipo';
+  let texto=`Hola Ilustre Phone! 👋\n\n`;
+  if(nombre) texto+=`Mi nombre es *${nombre}*.\n\n`;
+  if(es){
+    texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria}* disponible en *${productoActual.sucursal}*.\n`;
+    texto+=`Precio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+    texto+=`Batería: ${productoActual.bateria}%\n`;
+  } else {
+    texto+=`Me interesa el accesorio *${productoActual.nombre}*.\n`;
+    texto+=`Precio: *$ ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  }
+  texto+=`Sucursal preferida: *${suc}*\n`;
+  if(msg) texto+=`\n${msg}`;
+  texto+=`\n\n¿Está disponible?`;
+  const url=`https://wa.me/${WA_NUM}?text=${encodeURIComponent(texto)}`;
+  window.open(url,'_blank');
+  cerrarModal();
+  showToast('✅ Abriendo WhatsApp...');
+}
+
+// ====== TOAST ======
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ====== CARGA INICIAL ======
+async function init(){
+  try{
+    const [eqRows, acRows] = await Promise.all([sbGet('equipos'),sbGet('accesorios')]);
+    allEq = eqRows;
+    allAc = acRows;
+    console.log('Equipos cargados:', allEq.length, allEq.slice(0,2));
+    console.log('Accesorios cargados:', allAc.length, allAc.slice(0,2));
+    console.log('Equipos con stock>0:', allEq.filter(e=>e.stock>0).length);
+    renderEq();renderAc();
+  }catch(e){
+    console.error('Error cargando datos:', e);
+    document.getElementById('grid-eq').innerHTML=`<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Error al cargar productos: ${e.message}</p></div>`;
+    document.getElementById('grid-ac').innerHTML=`<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Error al cargar accesorios: ${e.message}</p></div>`;
+  }
+}
+init();
+
+// ====== CURSOR ======
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=(mx-5)+'px';cur.style.top=(my-5)+'px';
+});
+function animRing(){
+  rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.product-card,.filter-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)';});
+});
+
+// ====== MODAL CLOSE ON OVERLAY ======
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))cerrarModal();});
+
+// ====== FADE UP SCROLL ======
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
