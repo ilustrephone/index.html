@@ -907,34 +907,33 @@ let productoActual=null;
 function getImgEq(modelo){
   if(!modelo) return null;
   const m=modelo.toLowerCase();
-  // Imágenes oficiales de Apple CDN por modelo
+  // Usamos imágenes de Wikipedia/Wikimedia que permiten carga externa
   const imgs={
-    'iphone 16 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 16 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-3inch-deserttitanium?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 16 plus':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-plus-finish-select-202409-6-7inch-ultramarine?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 16':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-ultramarine?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 15 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 15 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 15 plus':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-plus-finish-select-202309-6-7inch-blue?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 15':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 14 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 14 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 14 plus':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-plus-finish-select-202209-6-7inch-midnight?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 14':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-midnight?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 13 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-finish-select-202209-6-7inch-sierrablue?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 13 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-finish-select-202209-6-1inch-sierrablue?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 13':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-finish-select-202207-6-1inch-midnight?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 13 mini':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-mini-finish-select-202207-5-4inch-midnight?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 12 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-max-pacific-blue-select-2020?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 12 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-pacific-blue-select-2020?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 12':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-blue-select-2020?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 12 mini':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-mini-blue-select-2020?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 11 pro max':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-pro-max-midnight-green-select-2019?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 11 pro':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-pro-midnight-green-select-2019?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone 11':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-11-black-select-2019?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'iphone se':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-se-finish-select-202203-midnight?wid=400&hei=400&fmt=jpeg&qlt=90',
+    'iphone 16 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IPhone_16_Pro_vector.svg/400px-IPhone_16_Pro_vector.svg.png',
+    'iphone 16 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IPhone_16_Pro_vector.svg/400px-IPhone_16_Pro_vector.svg.png',
+    'iphone 16 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/IPhone_16_vector.svg/400px-IPhone_16_vector.svg.png',
+    'iphone 16':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/IPhone_16_vector.svg/400px-IPhone_16_vector.svg.png',
+    'iphone 15 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/IPhone_15_Pro_vector.svg/400px-IPhone_15_Pro_vector.svg.png',
+    'iphone 15 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/IPhone_15_Pro_vector.svg/400px-IPhone_15_Pro_vector.svg.png',
+    'iphone 15 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/IPhone_15_vector.svg/400px-IPhone_15_vector.svg.png',
+    'iphone 15':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/IPhone_15_vector.svg/400px-IPhone_15_vector.svg.png',
+    'iphone 14 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IPhone_14_Pro_vector.svg/400px-IPhone_14_Pro_vector.svg.png',
+    'iphone 14 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IPhone_14_Pro_vector.svg/400px-IPhone_14_Pro_vector.svg.png',
+    'iphone 14 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixty/IPhone_14_vector.svg/400px-IPhone_14_vector.svg.png',
+    'iphone 14':'https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixty/IPhone_14_vector.svg/400px-IPhone_14_vector.svg.png',
+    'iphone 13 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/IPhone_13_Pro_vector.svg/400px-IPhone_13_Pro_vector.svg.png',
+    'iphone 13 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/IPhone_13_Pro_vector.svg/400px-IPhone_13_Pro_vector.svg.png',
+    'iphone 13 mini':'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/IPhone_13_vector.svg/400px-IPhone_13_vector.svg.png',
+    'iphone 13':'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/IPhone_13_vector.svg/400px-IPhone_13_vector.svg.png',
+    'iphone 12 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/IPhone_12_Pro_vector.svg/400px-IPhone_12_Pro_vector.svg.png',
+    'iphone 12 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/IPhone_12_Pro_vector.svg/400px-IPhone_12_Pro_vector.svg.png',
+    'iphone 12 mini':'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/IPhone_12_vector.svg/400px-IPhone_12_vector.svg.png',
+    'iphone 12':'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/IPhone_12_vector.svg/400px-IPhone_12_vector.svg.png',
+    'iphone 11 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/IPhone_11_Pro_vector.svg/400px-IPhone_11_Pro_vector.svg.png',
+    'iphone 11 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/IPhone_11_Pro_vector.svg/400px-IPhone_11_Pro_vector.svg.png',
+    'iphone 11':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/IPhone_11_vector.svg/400px-IPhone_11_vector.svg.png',
+    'iphone se':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/IPhone_SE_%283rd_generation%29_vector.svg/400px-IPhone_SE_%283rd_generation%29_vector.svg.png',
   };
-  // Buscar coincidencia exacta primero, luego parcial
   for(const key of Object.keys(imgs)){
     if(m.includes(key)) return imgs[key];
   }
@@ -945,15 +944,15 @@ function getImgAc(cat, nombre){
   const n=(nombre||'').toLowerCase();
   const imgs={
     'AirPods / Auriculares': n.includes('pro')
-      ? 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=400&hei=400&fmt=jpeg&qlt=90'
-      : 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MME73?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'Cargadores / Cables': n.includes('cable')
-      ? 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQKJ3?wid=400&hei=400&fmt=jpeg&qlt=90'
-      : 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHJA3?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'Fundas / Cases':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT3D3?wid=400&hei=400&fmt=jpeg&qlt=90',
-    'Vidrios templados':'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3?wid=400&hei=400&fmt=jpeg&qlt=90',
+      ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/AirPods_Pro_2nd_generation_vector.svg/400px-AirPods_Pro_2nd_generation_vector.svg.png'
+      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/AirPods_3rd_generation_vector.svg/400px-AirPods_3rd_generation_vector.svg.png',
+    'Cargadores / Cables': '⚡',
+    'Fundas / Cases': '🛡️',
+    'Vidrios templados': '🔲',
   };
-  return imgs[cat]||null;
+  const r=imgs[cat];
+  if(r&&r.startsWith('http')) return r;
+  return null;
 }
 
 function imgOrEmoji(src, emoji, cls='product-img'){
