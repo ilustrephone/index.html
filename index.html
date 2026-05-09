@@ -907,52 +907,71 @@ let productoActual=null;
 function getImgEq(modelo){
   if(!modelo) return null;
   const m=modelo.toLowerCase();
-  // Usamos imágenes de Wikipedia/Wikimedia que permiten carga externa
-  const imgs={
-    'iphone 16 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IPhone_16_Pro_vector.svg/400px-IPhone_16_Pro_vector.svg.png',
-    'iphone 16 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/IPhone_16_Pro_vector.svg/400px-IPhone_16_Pro_vector.svg.png',
-    'iphone 16 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/IPhone_16_vector.svg/400px-IPhone_16_vector.svg.png',
-    'iphone 16':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/IPhone_16_vector.svg/400px-IPhone_16_vector.svg.png',
-    'iphone 15 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/IPhone_15_Pro_vector.svg/400px-IPhone_15_Pro_vector.svg.png',
-    'iphone 15 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/IPhone_15_Pro_vector.svg/400px-IPhone_15_Pro_vector.svg.png',
-    'iphone 15 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/IPhone_15_vector.svg/400px-IPhone_15_vector.svg.png',
-    'iphone 15':'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/IPhone_15_vector.svg/400px-IPhone_15_vector.svg.png',
-    'iphone 14 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IPhone_14_Pro_vector.svg/400px-IPhone_14_Pro_vector.svg.png',
-    'iphone 14 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/IPhone_14_Pro_vector.svg/400px-IPhone_14_Pro_vector.svg.png',
-    'iphone 14 plus':'https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixty/IPhone_14_vector.svg/400px-IPhone_14_vector.svg.png',
-    'iphone 14':'https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixty/IPhone_14_vector.svg/400px-IPhone_14_vector.svg.png',
-    'iphone 13 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/IPhone_13_Pro_vector.svg/400px-IPhone_13_Pro_vector.svg.png',
-    'iphone 13 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/IPhone_13_Pro_vector.svg/400px-IPhone_13_Pro_vector.svg.png',
-    'iphone 13 mini':'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/IPhone_13_vector.svg/400px-IPhone_13_vector.svg.png',
-    'iphone 13':'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/IPhone_13_vector.svg/400px-IPhone_13_vector.svg.png',
-    'iphone 12 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/IPhone_12_Pro_vector.svg/400px-IPhone_12_Pro_vector.svg.png',
-    'iphone 12 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/IPhone_12_Pro_vector.svg/400px-IPhone_12_Pro_vector.svg.png',
-    'iphone 12 mini':'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/IPhone_12_vector.svg/400px-IPhone_12_vector.svg.png',
-    'iphone 12':'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/IPhone_12_vector.svg/400px-IPhone_12_vector.svg.png',
-    'iphone 11 pro max':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/IPhone_11_Pro_vector.svg/400px-IPhone_11_Pro_vector.svg.png',
-    'iphone 11 pro':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/IPhone_11_Pro_vector.svg/400px-IPhone_11_Pro_vector.svg.png',
-    'iphone 11':'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/IPhone_11_vector.svg/400px-IPhone_11_vector.svg.png',
-    'iphone se':'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/IPhone_SE_%283rd_generation%29_vector.svg/400px-IPhone_SE_%283rd_generation%29_vector.svg.png',
-  };
-  for(const key of Object.keys(imgs)){
-    if(m.includes(key)) return imgs[key];
-  }
-  return null;
+  // Color según modelo
+  let color1='#1D1D1F', color2='#3D3D3F', label='iPhone';
+  if(m.includes('16 pro')) {color1='#8B7355';color2='#A0896A';label=m.includes('max')?'16 Pro Max':'16 Pro';}
+  else if(m.includes('16')) {color1='#4A90D9';color2='#5BA3E8';label=m.includes('plus')?'16 Plus':'16';}
+  else if(m.includes('15 pro')) {color1='#8C8279';color2='#A09189';label=m.includes('max')?'15 Pro Max':'15 Pro';}
+  else if(m.includes('15')) {color1='#4A90D9';color2='#5BA3E8';label=m.includes('plus')?'15 Plus':'15';}
+  else if(m.includes('14 pro')) {color1='#4B0082';color2='#6A0DAD';label=m.includes('max')?'14 Pro Max':'14 Pro';}
+  else if(m.includes('14')) {color1='#1D1D1F';color2='#3D3D3F';label=m.includes('plus')?'14 Plus':'14';}
+  else if(m.includes('13 pro')) {color1='#1B4F8A';color2='#2E6DB4';label=m.includes('max')?'13 Pro Max':'13 Pro';}
+  else if(m.includes('13')) {color1='#1D1D1F';color2='#2D2D2F';label=m.includes('mini')?'13 mini':'13';}
+  else if(m.includes('12 pro')) {color1='#1C4587';color2='#2855A0';label=m.includes('max')?'12 Pro Max':'12 Pro';}
+  else if(m.includes('12')) {color1='#1C4587';color2='#2855A0';label=m.includes('mini')?'12 mini':'12';}
+  else if(m.includes('11 pro')) {color1='#2D5A27';color2='#3D7A35';label=m.includes('max')?'11 Pro Max':'11 Pro';}
+  else if(m.includes('11')) {color1='#F5C518';color2='#F7D133';label='11';}
+  else if(m.includes('se')) {color1='#1D1D1F';color2='#3D3D3F';label='SE';}
+  return `iphone-svg:${color1}:${color2}:${label}`;
 }
 
-function getImgAc(cat, nombre){
-  const n=(nombre||'').toLowerCase();
-  const imgs={
-    'AirPods / Auriculares': n.includes('pro')
-      ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/AirPods_Pro_2nd_generation_vector.svg/400px-AirPods_Pro_2nd_generation_vector.svg.png'
-      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/AirPods_3rd_generation_vector.svg/400px-AirPods_3rd_generation_vector.svg.png',
-    'Cargadores / Cables': '⚡',
-    'Fundas / Cases': '🛡️',
-    'Vidrios templados': '🔲',
-  };
-  const r=imgs[cat];
-  if(r&&r.startsWith('http')) return r;
-  return null;
+function getImgAc(cat, nombre){return null;}
+
+function buildIphoneSVG(color1, color2, label){
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 340" width="200" height="340">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:${color1}"/>
+      <stop offset="100%" style="stop-color:${color2}"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <!-- Cuerpo -->
+  <rect x="20" y="10" width="160" height="320" rx="26" ry="26" fill="url(#bg)"/>
+  <!-- Pantalla -->
+  <rect x="30" y="28" width="140" height="284" rx="18" ry="18" fill="url(#screen)"/>
+  <!-- Dynamic Island / Notch -->
+  <rect x="72" y="36" width="56" height="16" rx="8" ry="8" fill="${color1}"/>
+  <!-- Botones laterales -->
+  <rect x="16" y="90" width="4" height="36" rx="2" fill="${color2}" opacity="0.7"/>
+  <rect x="16" y="135" width="4" height="28" rx="2" fill="${color2}" opacity="0.7"/>
+  <rect x="180" y="110" width="4" height="48" rx="2" fill="${color2}" opacity="0.7"/>
+  <!-- Logo Apple en pantalla -->
+  <text x="100" y="175" font-family="Arial" font-size="40" text-anchor="middle" fill="rgba(255,255,255,0.15)"></text>
+  <!-- Modelo en pantalla -->
+  <text x="100" y="210" font-family="-apple-system,Arial,sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.6)">iPhone</text>
+  <text x="100" y="228" font-family="-apple-system,Arial,sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="rgba(255,255,255,0.85)">${label}</text>
+</svg>`)}`;
+}
+
+function imgOrEmoji(src, emoji, cls='product-img'){
+  if(src && src.startsWith('iphone-svg:')){
+    const [,c1,c2,lbl]=src.split(':');
+    const svgData=buildIphoneSVG(c1,c2,lbl);
+    return`<div class="${cls}" style="background:linear-gradient(135deg,${c1}22,${c2}44);">
+      <img src="${svgData}" alt="iPhone ${lbl}" style="width:75%;height:75%;object-fit:contain;"/>
+    </div>`;
+  }
+  if(src && src.startsWith('http')){
+    return`<div class="${cls}" style="background:#fff;">
+      <img src="${src}" alt="" style="width:100%;height:100%;object-fit:contain;padding:12px;"
+        onerror="this.parentElement.innerHTML='${emoji}';this.parentElement.style.background='var(--gris2)'"/>
+    </div>`;
+  }
+  return`<div class="${cls}">${emoji}</div>`;
 }
 
 function imgOrEmoji(src, emoji, cls='product-img'){
