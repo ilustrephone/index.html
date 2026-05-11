@@ -164,10 +164,11 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
     <span>Ilustre Phone</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#equipos">Equipos</a></li>
+    <li><a href="#equipos">iPhone</a></li>
+    <li><a href="#ipad">iPad</a></li>
+    <li><a href="#mac">Mac</a></li>
+    <li><a href="#watch">Watch</a></li>
     <li><a href="#accesorios">Accesorios</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#sucursales">Sucursales</a></li>
   </ul>
   <a href="https://wa.me/5492622271093" target="_blank" class="nav-wa">💬 Consultar</a>
 </nav>
@@ -181,8 +182,8 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
   <h1>El iPhone<br>que buscabas.</h1>
   <p class="hero-sub">Sellados y usados con garantía.<br>La Consulta y Tunuyán, Mendoza.</p>
   <div class="hero-ctas">
-    <a href="#equipos" class="btn-hp">Ver equipos</a>
-    <a href="#accesorios" class="btn-hs">Accesorios</a>
+    <a href="#equipos" class="btn-hp">Ver sellados</a>
+    <a href="#usados" class="btn-hs">Ver usados</a>
   </div>
   <div class="hero-scroll"><div class="hero-scroll-line"></div>scroll</div>
 </section>
@@ -190,9 +191,25 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
 <section class="section" id="equipos">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="section-eyebrow">Catálogo en tiempo real</div>
-      <h2 class="section-title">Equipos disponibles.</h2>
-      <p class="section-sub">Stock actualizado al instante. Todos con garantía y verificados.</p>
+      <div class="section-eyebrow">Nuevos · De fábrica</div>
+      <h2 class="section-title">iPhone Sellados.</h2>
+      <p class="section-sub">Equipos nuevos, sin uso, con caja y garantía oficial.</p>
+    </div>
+    <div class="filters fade-up">
+      <button class="filter-pill active" onclick="filtrarSellados('todos',this)">Todos</button>
+      <button class="filter-pill" onclick="filtrarSellados('iPhone 16',this)">iPhone 16</button>
+      <button class="filter-pill" onclick="filtrarSellados('iPhone 15',this)">iPhone 15</button>
+    </div>
+    <div class="products-grid" id="grid-sellados"></div>
+  </div>
+</section>
+
+<section class="section section-gray" id="usados">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">Verificados · Con garantía</div>
+      <h2 class="section-title">iPhone Usados.</h2>
+      <p class="section-sub">Equipos revisados, con batería verificada y garantía de funcionamiento.</p>
     </div>
     <div class="filters fade-up">
       <button class="filter-pill active" onclick="filtrarEq('todos',this)">Todos</button>
@@ -210,11 +227,59 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
   </div>
 </section>
 
-<section class="section section-gray" id="accesorios">
+<section class="section" id="ipad">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="section-eyebrow">Para tu iPhone</div>
-      <h2 class="section-title">Accesorios.</h2>
+      <div class="section-eyebrow">Potencia en tus manos</div>
+      <h2 class="section-title">iPad.</h2>
+      <p class="section-sub">Todos los modelos disponibles. Sellados con garantía.</p>
+    </div>
+    <div class="filters fade-up">
+      <button class="filter-pill active" onclick="filtrarSeccion('ipad','todos',this)">Todos</button>
+      <button class="filter-pill" onclick="filtrarSeccion('ipad','iPad Pro',this)">iPad Pro</button>
+      <button class="filter-pill" onclick="filtrarSeccion('ipad','iPad Air',this)">iPad Air</button>
+      <button class="filter-pill" onclick="filtrarSeccion('ipad','iPad mini',this)">iPad mini</button>
+    </div>
+    <div class="products-grid" id="grid-ipad"></div>
+  </div>
+</section>
+
+<section class="section section-gray" id="mac">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">Apple Silicon</div>
+      <h2 class="section-title">Mac.</h2>
+      <p class="section-sub">MacBook y Mac de escritorio. Sellados con garantía.</p>
+    </div>
+    <div class="filters fade-up">
+      <button class="filter-pill active" onclick="filtrarSeccion('mac','todos',this)">Todos</button>
+      <button class="filter-pill" onclick="filtrarSeccion('mac','MacBook Air',this)">MacBook Air</button>
+      <button class="filter-pill" onclick="filtrarSeccion('mac','MacBook Pro',this)">MacBook Pro</button>
+      <button class="filter-pill" onclick="filtrarSeccion('mac','Mac mini',this)">Mac mini</button>
+      <button class="filter-pill" onclick="filtrarSeccion('mac','iMac',this)">iMac</button>
+    </div>
+    <div class="products-grid" id="grid-mac"></div>
+  </div>
+</section>
+
+<section class="section" id="watch">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">El reloj más avanzado</div>
+      <h2 class="section-title">Apple Watch.</h2>
+      <p class="section-sub">Series 10, Ultra 2 y SE. Sellados con garantía.</p>
+    </div>
+    <div class="filters fade-up">
+      <button class="filter-pill active" onclick="filtrarSeccion('watch','todos',this)">Todos</button>
+      <button class="filter-pill" onclick="filtrarSeccion('watch','Series 10',this)">Series 10</button>
+      <button class="filter-pill" onclick="filtrarSeccion('watch','Ultra',this)">Ultra 2</button>
+      <button class="filter-pill" onclick="filtrarSeccion('watch','SE',this)">SE</button>
+    </div>
+    <div class="products-grid" id="grid-watch"></div>
+  </div>
+</section>
+
+<section class="section section-gray" id="accesorios">
       <p class="section-sub">Fundas, cargadores, AirPods y vidrios templados.</p>
     </div>
     <div class="filters fade-up">
@@ -311,6 +376,56 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
 const SUPA_URL='https://rvnvixiuigluutbzftxq.supabase.co';
 const SUPA_KEY='sb_publishable_y3TIT6mATrqkoaki2zZSew__HDhxZCm';
 const WA_NUM='5492622271093';
+
+// ============================================================
+// ⚙️ EQUIPOS SELLADOS — Editá esta lista para cambiar precios
+// ============================================================
+const SELLADOS = [
+  { modelo:'iPhone 16 Pro Max', memoria:'256GB', precio:1449, color:'#8B7355' },
+  { modelo:'iPhone 16 Pro Max', memoria:'512GB', precio:1599, color:'#8B7355' },
+  { modelo:'iPhone 16 Pro',     memoria:'128GB', precio:1299, color:'#8B7355' },
+  { modelo:'iPhone 16 Pro',     memoria:'256GB', precio:1399, color:'#8B7355' },
+  { modelo:'iPhone 16',         memoria:'128GB', precio:999,  color:'#4A90D9' },
+  { modelo:'iPhone 16',         memoria:'256GB', precio:1099, color:'#4A90D9' },
+  { modelo:'iPhone 15 Pro Max', memoria:'256GB', precio:1249, color:'#8C8279' },
+  { modelo:'iPhone 15 Pro',     memoria:'128GB', precio:1099, color:'#8C8279' },
+  { modelo:'iPhone 15',         memoria:'128GB', precio:849,  color:'#4A90D9' },
+];
+
+// ============================================================
+// ⚙️ iPAD — Editá esta lista para cambiar precios
+// ============================================================
+const IPADS = [
+  { modelo:'iPad Pro 13"',    memoria:'256GB', precio:1299, chip:'M4', color:'#1D1D1F' },
+  { modelo:'iPad Pro 11"',    memoria:'256GB', precio:1099, chip:'M4', color:'#1D1D1F' },
+  { modelo:'iPad Air 13"',    memoria:'128GB', precio:799,  chip:'M2', color:'#4A90D9' },
+  { modelo:'iPad Air 11"',    memoria:'128GB', precio:699,  chip:'M2', color:'#4A90D9' },
+  { modelo:'iPad mini',       memoria:'128GB', precio:599,  chip:'A17 Pro', color:'#8B7355' },
+  { modelo:'iPad',            memoria:'64GB',  precio:449,  chip:'A16', color:'#1D1D1F' },
+];
+
+// ============================================================
+// ⚙️ MAC — Editá esta lista para cambiar precios
+// ============================================================
+const MACS = [
+  { modelo:'MacBook Air 13"', memoria:'256GB', precio:1099, chip:'M3', color:'#C0C0C0' },
+  { modelo:'MacBook Air 15"', memoria:'256GB', precio:1299, chip:'M3', color:'#C0C0C0' },
+  { modelo:'MacBook Pro 14"', memoria:'512GB', precio:1999, chip:'M4 Pro', color:'#1D1D1F' },
+  { modelo:'MacBook Pro 16"', memoria:'512GB', precio:2499, chip:'M4 Pro', color:'#1D1D1F' },
+  { modelo:'Mac mini',        memoria:'256GB', precio:699,  chip:'M4', color:'#6E6E73' },
+  { modelo:'iMac 24"',        memoria:'256GB', precio:1299, chip:'M4', color:'#4A90D9' },
+];
+
+// ============================================================
+// ⚙️ APPLE WATCH — Editá esta lista para cambiar precios
+// ============================================================
+const WATCHES = [
+  { modelo:'Apple Watch Series 10', caja:'42mm', precio:399, color:'#1D1D1F' },
+  { modelo:'Apple Watch Series 10', caja:'46mm', precio:429, color:'#1D1D1F' },
+  { modelo:'Apple Watch Ultra 2',   caja:'49mm', precio:799, color:'#8B7355' },
+  { modelo:'Apple Watch SE',        caja:'40mm', precio:249, color:'#C0C0C0' },
+  { modelo:'Apple Watch SE',        caja:'44mm', precio:279, color:'#C0C0C0' },
+];
 
 async function sbGet(tabla){
   const res=await fetch(`${SUPA_URL}/rest/v1/${tabla}?select=id,data&order=updated_at.asc`,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}});
@@ -419,6 +534,176 @@ function renderAc(){
     </div>`).join('');
 }
 
+let filtroSellados='todos';
+
+let filtros={ipad:'todos',mac:'todos',watch:'todos'};
+
+function filtrarSeccion(seccion,f,btn){
+  filtros[seccion]=f;
+  document.querySelectorAll(`#${seccion} .filter-pill`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(seccion==='ipad') renderIPad();
+  else if(seccion==='mac') renderMac();
+  else if(seccion==='watch') renderWatch();
+}
+
+function buildIPadSVG(color){
+  return`data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 320"><defs><linearGradient id="ig" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:'+color+'"/><stop offset="100%" style="stop-color:'+color+'cc"/></linearGradient></defs><rect x="20" y="10" width="200" height="300" rx="20" fill="url(#ig)"/><rect x="34" y="26" width="172" height="268" rx="12" fill="#1a1a2e"/><rect x="108" y="14" width="24" height="8" rx="4" fill="'+color+'"/></svg>')}`;
+}
+
+function buildMacSVG(color){
+  return`data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 240"><defs><linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:'+color+'"/><stop offset="100%" style="stop-color:'+color+'cc"/></linearGradient></defs><rect x="20" y="10" width="300" height="190" rx="12" fill="url(#mg)"/><rect x="32" y="22" width="276" height="166" rx="8" fill="#1a1a2e"/><rect x="0" y="205" width="340" height="18" rx="4" fill="'+color+'"/><rect x="120" y="220" width="100" height="8" rx="4" fill="'+color+'aa"/></svg>')}`;
+}
+
+function buildWatchSVG(color){
+  return`data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280"><defs><linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:'+color+'"/><stop offset="100%" style="stop-color:'+color+'aa"/></linearGradient></defs><rect x="75" y="0" width="50" height="60" rx="8" fill="'+color+'88"/><rect x="75" y="220" width="50" height="60" rx="8" fill="'+color+'88"/><rect x="30" y="55" width="140" height="170" rx="40" fill="url(#wg)"/><rect x="42" y="70" width="116" height="140" rx="32" fill="#1a1a2e"/><text x="100" y="148" font-family="Arial,sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="rgba(255,255,255,0.85)">◎</text></svg>')}`;
+}
+
+function renderIPad(){
+  const grid=document.getElementById('grid-ipad');
+  if(!grid) return;
+  let data=IPADS;
+  if(filtros.ipad!=='todos') data=data.filter(e=>e.modelo.includes(filtros.ipad));
+  grid.innerHTML=data.map(e=>`
+    <div class="product-card" onclick='abrirModalGenerico(${JSON.stringify(e).replace(/'/g,"&#39;")}, "ipad")'>
+      <div class="product-img" style="background:linear-gradient(135deg,${e.color}15,${e.color}28);">
+        <img src="${buildIPadSVG(e.color)}" style="width:65%;height:65%;object-fit:contain;"/>
+      </div>
+      <div class="product-badge-ap">SELLADO</div>
+      <div class="product-body">
+        <div class="product-cat">Chip ${e.chip} · Sellado · Garantía</div>
+        <div class="product-name">${e.modelo}</div>
+        <div class="product-specs-row"><span class="spec-tag">${e.memoria}</span><span class="spec-tag">✅ Garantía</span></div>
+        <div class="product-footer">
+          <div class="product-price">USD ${e.precio.toLocaleString('es-AR')} <small>dólares</small></div>
+          <button class="btn-ap">Consultar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderMac(){
+  const grid=document.getElementById('grid-mac');
+  if(!grid) return;
+  let data=MACS;
+  if(filtros.mac!=='todos') data=data.filter(e=>e.modelo.includes(filtros.mac));
+  grid.innerHTML=data.map(e=>`
+    <div class="product-card" onclick='abrirModalGenerico(${JSON.stringify(e).replace(/'/g,"&#39;")}, "mac")'>
+      <div class="product-img" style="background:linear-gradient(135deg,${e.color}18,${e.color}30);">
+        <img src="${buildMacSVG(e.color)}" style="width:80%;height:80%;object-fit:contain;"/>
+      </div>
+      <div class="product-badge-ap">SELLADO</div>
+      <div class="product-body">
+        <div class="product-cat">Chip ${e.chip} · Sellado · Garantía</div>
+        <div class="product-name">${e.modelo}</div>
+        <div class="product-specs-row"><span class="spec-tag">${e.memoria}</span><span class="spec-tag">✅ Garantía</span></div>
+        <div class="product-footer">
+          <div class="product-price">USD ${e.precio.toLocaleString('es-AR')} <small>dólares</small></div>
+          <button class="btn-ap">Consultar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderWatch(){
+  const grid=document.getElementById('grid-watch');
+  if(!grid) return;
+  let data=WATCHES;
+  if(filtros.watch!=='todos') data=data.filter(e=>e.modelo.includes(filtros.watch));
+  grid.innerHTML=data.map(e=>`
+    <div class="product-card" onclick='abrirModalGenerico(${JSON.stringify(e).replace(/'/g,"&#39;")}, "watch")'>
+      <div class="product-img" style="background:linear-gradient(135deg,${e.color}15,${e.color}28);">
+        <img src="${buildWatchSVG(e.color)}" style="width:50%;height:80%;object-fit:contain;"/>
+      </div>
+      <div class="product-badge-ap">SELLADO</div>
+      <div class="product-body">
+        <div class="product-cat">Sellado · Garantía oficial</div>
+        <div class="product-name">${e.modelo}</div>
+        <div class="product-specs-row"><span class="spec-tag">${e.caja}</span><span class="spec-tag">✅ Garantía</span></div>
+        <div class="product-footer">
+          <div class="product-price">USD ${e.precio.toLocaleString('es-AR')} <small>dólares</small></div>
+          <button class="btn-ap">Consultar</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function abrirModalGenerico(prod, tipo){
+  productoActual={...prod,tipo};
+  const labels={ipad:'iPad · Sellado · Garantía',mac:'Mac · Sellado · Garantía',watch:'Apple Watch · Sellado · Garantía'};
+  document.getElementById('modal-cat').textContent=labels[tipo]||'Sellado · Garantía';
+  const titulo=tipo==='watch'?`${prod.modelo} ${prod.caja}`:`${prod.modelo} ${prod.memoria||''}`;
+  document.getElementById('modal-title').textContent=titulo;
+  document.getElementById('modal-price').textContent=`USD ${prod.precio.toLocaleString('es-AR')}`;
+  const chip=prod.chip?`<span class="spec-tag">Chip ${prod.chip}</span>`:'';
+  const extra=prod.caja?`<span class="spec-tag">${prod.caja}</span>`:(prod.memoria?`<span class="spec-tag">${prod.memoria}</span>`:'');
+  document.getElementById('modal-specs').innerHTML=`${extra}${chip}<span class="spec-tag">✅ Garantía</span>`;
+  const mi=document.getElementById('modal-img');
+  const c=prod.color||'#1D1D1F';
+  mi.style.background=`linear-gradient(135deg,${c}15,${c}28)`;
+  if(tipo==='ipad') mi.innerHTML=`<img src="${buildIPadSVG(c)}" style="width:60%;height:60%;object-fit:contain;"/>`;
+  else if(tipo==='mac') mi.innerHTML=`<img src="${buildMacSVG(c)}" style="width:80%;height:80%;object-fit:contain;"/>`;
+  else mi.innerHTML=`<img src="${buildWatchSVG(c)}" style="width:45%;height:75%;object-fit:contain;"/>`;
+  document.getElementById('m-nombre').value='';document.getElementById('m-msg').value='';
+  document.getElementById('modal').classList.add('open');
+}
+
+function filtrarSellados(f,btn){
+  filtroSellados=f;
+  document.querySelectorAll('#equipos .filter-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSellados();
+}
+
+function renderSellados(){
+  const grid=document.getElementById('grid-sellados');
+  let data=SELLADOS;
+  if(filtroSellados!=='todos') data=data.filter(e=>e.modelo.includes(filtroSellados));
+  if(!data.length){grid.innerHTML=`<div class="empty-ap">No hay equipos sellados con ese filtro.</div>`;return;}
+  grid.innerHTML=data.map(e=>{
+    const d=getImgData(e.modelo);
+    const c1=e.color||d?.c1||'#1D1D1F';
+    const c2=d?.c2||'#3D3D3F';
+    const lbl=d?.lbl||(e.modelo+' '+e.memoria);
+    const svgSrc=buildSVG(c1,c2,lbl);
+    return`<div class="product-card" onclick='abrirModalSellado(${JSON.stringify(e).replace(/'/g,"&#39;")})'>
+      <div class="product-img" style="background:linear-gradient(135deg,${c1}15,${c2}28);">
+        <img src="${svgSrc}" style="width:68%;height:68%;object-fit:contain;"/>
+      </div>
+      <div class="product-badge-ap">SELLADO</div>
+      <div class="product-body">
+        <div class="product-cat">Nuevo · Sin uso · Caja original</div>
+        <div class="product-name">${e.modelo}</div>
+        <div class="product-specs-row">
+          <span class="spec-tag">${e.memoria}</span>
+          <span class="spec-tag">✅ Garantía</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">USD ${e.precio.toLocaleString('es-AR')} <small>dólares</small></div>
+          <button class="btn-ap">Consultar</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function abrirModalSellado(prod){
+  productoActual={...prod,tipo:'sellado'};
+  const d=getImgData(prod.modelo);
+  const c1=prod.color||d?.c1||'#1D1D1F';
+  const c2=d?.c2||'#3D3D3F';
+  const lbl=d?.lbl||prod.modelo;
+  document.getElementById('modal-cat').textContent='Nuevo · Sellado · Garantía oficial';
+  document.getElementById('modal-title').textContent=`${prod.modelo} ${prod.memoria}`;
+  document.getElementById('modal-price').textContent=`USD ${prod.precio.toLocaleString('es-AR')}`;
+  document.getElementById('modal-specs').innerHTML=`<span class="spec-tag">📦 Caja original</span><span class="spec-tag">✅ Garantía</span><span class="spec-tag">${prod.memoria}</span>`;
+  const mi=document.getElementById('modal-img');
+  mi.style.background=`linear-gradient(135deg,${c1}15,${c2}28)`;
+  mi.innerHTML=`<img src="${buildSVG(c1,c2,lbl)}" style="width:60%;height:60%;object-fit:contain;"/>`;
+  document.getElementById('m-nombre').value='';document.getElementById('m-msg').value='';
+  document.getElementById('modal').classList.add('open');
+}
+
 function filtrarEq(f,btn){filtroEq=f;document.querySelectorAll('#equipos .filter-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderEq();}
 function buscarEq(q){busqEq=q;renderEq();}
 function filtrarAc(f,btn){filtroAc=f;document.querySelectorAll('#accesorios .filter-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAc();}
@@ -455,11 +740,22 @@ function enviarWA(){
   const nombre=document.getElementById('m-nombre').value.trim();
   const suc=document.getElementById('m-suc').value;
   const msg=document.getElementById('m-msg').value.trim();
-  const es=productoActual.tipo==='equipo';
+  const es=productoActual.tipo==='equipo'||productoActual.tipo==='sellado';
   let texto=`Hola Ilustre Phone! 👋\n\n`;
   if(nombre) texto+=`Mi nombre es *${nombre}*.\n\n`;
-  if(es){texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria||''}* en *${productoActual.sucursal}*.\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\nBatería: ${productoActual.bateria}%\n`;}
-  else{texto+=`Me interesa *${productoActual.nombre}*.\nPrecio: *$ ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;}
+  if(productoActual.tipo==='sellado'){
+    texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria}* (iPhone sellado).\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  } else if(productoActual.tipo==='equipo'){
+    texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria||''}* (usado) en *${productoActual.sucursal}*.\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\nBatería: ${productoActual.bateria}%\n`;
+  } else if(productoActual.tipo==='ipad'){
+    texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria}* (iPad sellado).\nChip: ${productoActual.chip}\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  } else if(productoActual.tipo==='mac'){
+    texto+=`Me interesa la *${productoActual.modelo} ${productoActual.memoria}* (Mac sellada).\nChip: ${productoActual.chip}\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  } else if(productoActual.tipo==='watch'){
+    texto+=`Me interesa el *${productoActual.modelo} ${productoActual.caja}* (Apple Watch sellado).\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  } else {
+    texto+=`Me interesa *${productoActual.nombre}*.\nPrecio: *$ ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+  }
   texto+=`Sucursal: *${suc}*\n`;
   if(msg) texto+=`\n${msg}`;
   texto+=`\n\n¿Está disponible?`;
@@ -473,6 +769,7 @@ async function refreshStock(){
 setInterval(refreshStock,5*60*1000);
 
 async function init(){
+  renderSellados();renderIPad();renderMac();renderWatch();
   try{const[e,a]=await Promise.all([sbGet('equipos'),sbGet('accesorios')]);allEq=e;allAc=a;renderEq();renderAc();}
   catch(e){console.error(e);document.getElementById('grid-eq').innerHTML=`<div class="empty-ap">Error al cargar. <a href="https://wa.me/${WA_NUM}" style="color:var(--azul)">Consultanos</a></div>`;document.getElementById('grid-ac').innerHTML=`<div class="empty-ap">Error al cargar.</div>`;}
 }
