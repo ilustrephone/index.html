@@ -735,6 +735,7 @@ footer{
     <button class="filter-btn active" onclick="filtrarEq('todos',this)">Todos</button>
     <button class="filter-btn" onclick="filtrarEq('Tunuyán',this)">📍 Tunuyán</button>
     <button class="filter-btn" onclick="filtrarEq('La Consulta',this)">📍 La Consulta</button>
+    <button class="filter-btn" onclick="refreshStock()" style="margin-left:auto;border-color:rgba(91,111,143,0.4);color:var(--acento2);">🔄 Actualizar</button>
     <div class="search-box">
       <span class="search-icon-s">🔍</span>
       <input type="text" placeholder="Buscar modelo..." id="search-eq" oninput="buscarEq(this.value)"/>
@@ -1180,6 +1181,18 @@ async function init(){
     document.getElementById('grid-ac').innerHTML=`<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Error al cargar accesorios: ${e.message}</p></div>`;
   }
 }
+
+async function refreshStock(){
+  try{
+    const [eqRows, acRows] = await Promise.all([sbGet('equipos'),sbGet('accesorios')]);
+    allEq = eqRows;
+    allAc = acRows;
+    renderEq();renderAc();
+  }catch(e){ console.error('Error actualizando:', e); }
+}
+
+// Auto-refresh cada 5 minutos
+setInterval(refreshStock, 5 * 60 * 1000);
 init();
 
 // ====== CURSOR ======
