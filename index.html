@@ -195,10 +195,8 @@ footer{background:var(--gris3);border-top:1px solid var(--gris2);padding:40px 22
       <h2 class="section-title">iPhone Sellados.</h2>
       <p class="section-sub">Equipos nuevos, sin uso, con caja y garantía oficial.</p>
     </div>
-    <div class="filters fade-up">
+    <div class="filters fade-up" id="filtros-sellados">
       <button class="filter-pill active" onclick="filtrarSellados('todos',this)">Todos</button>
-      <button class="filter-pill" onclick="filtrarSellados('iPhone 16',this)">iPhone 16</button>
-      <button class="filter-pill" onclick="filtrarSellados('iPhone 15',this)">iPhone 15</button>
     </div>
     <div class="products-grid" id="grid-sellados"></div>
   </div>
@@ -378,9 +376,11 @@ const SUPA_KEY='sb_publishable_y3TIT6mATrqkoaki2zZSew__HDhxZCm';
 const WA_NUM='5492622271093';
 
 // ============================================================
-// ⚙️ EQUIPOS SELLADOS — Editá esta lista para cambiar precios
+// EQUIPOS SELLADOS — se cargan de iStock (Equipos → Lista de precios · Sellados).
+// (La lista de abajo quedó como referencia vieja; la web ya no la muestra.)
 // ============================================================
-const SELLADOS = [
+let selladosLive=null;
+const SELLADOS_RESPALDO = [
   { modelo:'iPhone 17 Pro Max', memoria:'256GB', precio:1540, color:'#8B7355' },
   { modelo:'iPhone 17 Pro Max', memoria:'512GB', precio:1660, color:'#8B7355' },
   { modelo:'iPhone 17 Pro',     memoria:'256GB', precio:1380, color:'#8B7355' },
@@ -439,7 +439,14 @@ function getImgData(modelo){
   if(!modelo) return null;
   const m=modelo.toLowerCase();
   let c1='#1D1D1F',c2='#3D3D3F',lbl='iPhone';
-  if(m.includes('16 pro max')){c1='#8B7355';c2='#A0896A';lbl='16 Pro Max';}
+  if(m.includes('18 pro max')){c1='#7A2E3B';c2='#9A4554';lbl='18 Pro Max';}
+  else if(m.includes('18 pro')){c1='#7A2E3B';c2='#9A4554';lbl='18 Pro';}
+  else if(m.includes('18')){c1='#4A90D9';c2='#5BA3E8';lbl='18';}
+  else if(m.includes('17 pro max')){c1='#C8641E';c2='#E07B33';lbl='17 Pro Max';}
+  else if(m.includes('17 pro')){c1='#C8641E';c2='#E07B33';lbl='17 Pro';}
+  else if(m.includes('17 air')||m.includes('air')){c1='#8C8279';c2='#A09189';lbl='Air';}
+  else if(m.includes('17')){c1='#4A90D9';c2='#5BA3E8';lbl='17';}
+  else if(m.includes('16 pro max')){c1='#8B7355';c2='#A0896A';lbl='16 Pro Max';}
   else if(m.includes('16 pro')){c1='#8B7355';c2='#A0896A';lbl='16 Pro';}
   else if(m.includes('16 plus')){c1='#4A90D9';c2='#5BA3E8';lbl='16 Plus';}
   else if(m.includes('16')){c1='#4A90D9';c2='#5BA3E8';lbl='16';}
@@ -481,7 +488,7 @@ function imgAcHTML(a,cls){
 
 function renderEq(){
   const grid=document.getElementById('grid-eq');
-  let data=allEq.filter(e=>Number(e.stock)>0);
+  let data=allEq.filter(e=>Number(e.stock)>0&&!e.sellado&&!(e.ocultoLista!=null?e.ocultoLista:/señad|senad|reservad/i.test(String(e.modelo||''))));
   if(filtroEq!=='todos') data=data.filter(e=>e.sucursal===filtroEq);
   if(busqEq) data=data.filter(e=>(e.modelo||'').toLowerCase().includes(busqEq.toLowerCase())||(e.memoria||'').toLowerCase().includes(busqEq.toLowerCase()));
   if(!data.length){grid.innerHTML=`<div class="empty-ap">${allEq.length?'No hay equipos con ese filtro. <a href="https://wa.me/'+WA_NUM+'" style="color:var(--azul)">Consultanos</a>':'<div class="loading-ap"><div class="spin-ap"></div><span>Cargando...</span></div>'}</div>`;return;}
@@ -653,11 +660,30 @@ function filtrarSellados(f,btn){
   renderSellados();
 }
 
+function selladosData(){ return selladosLive!==null?selladosLive:SELLADOS_RESPALDO; }
+function familiaSellado(m){ const x=String(m||'').match(/iphone\s*(\d{2})/i); return x?'iPhone '+x[1]:''; }
+function renderFiltrosSellados(){
+  const box=document.getElementById('filtros-sellados'); if(!box) return;
+  const fams=[...new Set(selladosData().map(e=>familiaSellado(e.modelo)).filter(Boolean))].sort((a,b)=>parseInt(b.slice(7))-parseInt(a.slice(7)));
+  if(filtroSellados!=='todos'&&!fams.includes(filtroSellados)) filtroSellados='todos';
+  box.innerHTML=`<button class="filter-pill${filtroSellados==='todos'?' active':''}" onclick="filtrarSellados('todos',this)">Todos</button>`+
+    fams.map(f=>`<button class="filter-pill${filtroSellados===f?' active':''}" onclick="filtrarSellados('${f}',this)">${f}</button>`).join('');
+}
+async function cargarSellados(){
+  try{
+    const rows=await sbGet('precios_sellados');
+    selladosLive=rows.filter(r=>r.disp!=='Sin stock'&&Number(r.precio)>0).map(r=>({
+      modelo:/iphone/i.test(r.modelo||'')?r.modelo:'iPhone '+r.modelo, memoria:r.memoria||'', precio:Number(r.precio)||0,
+      colores:r.colores||'', disp:r.disp||'Entrega inmediata', nota:r.nota||''
+    })).sort((a,b)=>{const n=x=>parseInt((x.modelo.match(/\d{2}/)||[0])[0]);const v=x=>/pro max/i.test(x.modelo)?3:/pro/i.test(x.modelo)?2:/air|plus/i.test(x.modelo)?1:0;return n(b)-n(a)||v(b)-v(a)||(parseInt(a.memoria)||0)-(parseInt(b.memoria)||0);});
+  }catch(e){ console.error('No se pudo cargar la lista de sellados',e); if(selladosLive===null) selladosLive=[]; }
+  renderFiltrosSellados(); renderSellados();
+}
 function renderSellados(){
   const grid=document.getElementById('grid-sellados');
-  let data=SELLADOS;
+  let data=selladosData();
   if(filtroSellados!=='todos') data=data.filter(e=>e.modelo.includes(filtroSellados));
-  if(!data.length){grid.innerHTML=`<div class="empty-ap">No hay equipos sellados con ese filtro.</div>`;return;}
+  if(!data.length){grid.innerHTML=`<div class="empty-ap">${selladosData().length?'No hay equipos sellados con ese filtro.':'Consultanos por los iPhone sellados disponibles.'} <a href="https://wa.me/${WA_NUM}" style="color:var(--azul)">Escribinos</a></div>`;return;}
   grid.innerHTML=data.map(e=>{
     const d=getImgData(e.modelo);
     const c1=e.color||d?.c1||'#1D1D1F';
@@ -668,14 +694,15 @@ function renderSellados(){
       <div class="product-img" style="background:linear-gradient(135deg,${c1}15,${c2}28);">
         <img src="${svgSrc}" style="width:68%;height:68%;object-fit:contain;"/>
       </div>
-      <div class="product-badge-ap">SELLADO</div>
+      <div class="product-badge-ap">${e.disp==='A pedido'?'A PEDIDO':'SELLADO'}</div>
       <div class="product-body">
         <div class="product-cat">Nuevo · Sin uso · Caja original</div>
         <div class="product-name">${e.modelo}</div>
         <div class="product-specs-row">
           <span class="spec-tag">${e.memoria}</span>
-          <span class="spec-tag">✅ Garantía</span>
+          <span class="spec-tag">${e.disp==='A pedido'?'⏳ A pedido':'✅ Entrega inmediata'}</span>
         </div>
+        ${e.colores?`<div style="font-size:12px;color:var(--gris1);margin:2px 0 8px">🎨 ${e.colores}</div>`:''}
         <div class="product-footer">
           <div class="product-price">USD ${e.precio.toLocaleString('es-AR')} <small>dólares</small></div>
           <button class="btn-ap">Consultar</button>
@@ -694,7 +721,7 @@ function abrirModalSellado(prod){
   document.getElementById('modal-cat').textContent='Nuevo · Sellado · Garantía oficial';
   document.getElementById('modal-title').textContent=`${prod.modelo} ${prod.memoria}`;
   document.getElementById('modal-price').textContent=`USD ${prod.precio.toLocaleString('es-AR')}`;
-  document.getElementById('modal-specs').innerHTML=`<span class="spec-tag">📦 Caja original</span><span class="spec-tag">✅ Garantía</span><span class="spec-tag">${prod.memoria}</span>`;
+  document.getElementById('modal-specs').innerHTML=`<span class="spec-tag">📦 Caja original</span><span class="spec-tag">✅ Garantía</span><span class="spec-tag">${prod.memoria}</span>${prod.disp==='A pedido'?`<span class="spec-tag">⏳ A pedido${prod.nota?' · '+prod.nota:''}</span>`:''}${prod.colores?`<span class="spec-tag">🎨 ${prod.colores}</span>`:''}`;
   const mi=document.getElementById('modal-img');
   mi.style.background=`linear-gradient(135deg,${c1}15,${c2}28)`;
   mi.innerHTML=`<img src="${buildSVG(c1,c2,lbl)}" style="width:60%;height:60%;object-fit:contain;"/>`;
@@ -743,6 +770,7 @@ function enviarWA(){
   if(nombre) texto+=`Mi nombre es *${nombre}*.\n\n`;
   if(productoActual.tipo==='sellado'){
     texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria}* (iPhone sellado).\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\n`;
+    if(productoActual.colores) texto+=`Colores disponibles: ${productoActual.colores}\n`;
   } else if(productoActual.tipo==='equipo'){
     texto+=`Me interesa el *${productoActual.modelo} ${productoActual.memoria||''}* (usado) en *${productoActual.sucursal}*.\nPrecio: *USD ${(productoActual.precio||0).toLocaleString('es-AR')}*\nBatería: ${productoActual.bateria}%\n`;
   } else if(productoActual.tipo==='ipad'){
@@ -762,12 +790,14 @@ function enviarWA(){
 }
 
 async function refreshStock(){
+  cargarSellados();
   try{const[e,a]=await Promise.all([sbGet('equipos'),sbGet('accesorios')]);allEq=e;allAc=a;renderEq();renderAc();}catch(e){console.error(e);}
 }
 setInterval(refreshStock,5*60*1000);
 
 async function init(){
-  renderSellados();renderIPad();renderMac();renderWatch();
+  renderIPad();renderMac();renderWatch();
+  cargarSellados();
   try{const[e,a]=await Promise.all([sbGet('equipos'),sbGet('accesorios')]);allEq=e;allAc=a;renderEq();renderAc();}
   catch(e){console.error(e);document.getElementById('grid-eq').innerHTML=`<div class="empty-ap">Error al cargar. <a href="https://wa.me/${WA_NUM}" style="color:var(--azul)">Consultanos</a></div>`;document.getElementById('grid-ac').innerHTML=`<div class="empty-ap">Error al cargar.</div>`;}
 }
